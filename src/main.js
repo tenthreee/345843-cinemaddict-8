@@ -51,13 +51,9 @@ const renderExtraMovies = () => {
 
 renderExtraMovies();
 
-const onFilterClick = (evt) => {
-  evt.preventDefault();
-
+const onFiltersBarClick = () => {
   removeChildren(moviesContainer);
   renderMovies(getRandomNumber(0, MoviesAmount.MAX), moviesContainer);
 };
 
-for (const filter of filters) {
-  filter.addEventListener(`click`, onFilterClick);
-}
+filtersBar.addEventListener(`click`, onFiltersBarClick);
