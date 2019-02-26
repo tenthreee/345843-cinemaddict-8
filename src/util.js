@@ -1,0 +1,4 @@
+export const getRandomNumber = (min, max) => Math.round(Math.random() * (max - min) + min);
+export const removeChildren = (parent) => {
+  parent.innerHTML = ``;
+};
