@@ -11,7 +11,6 @@ const MoviesAmount = {
 };
 
 const filtersBar = document.querySelector(`.main-navigation`);
-const filters = filtersBar.querySelectorAll(`.main-navigation__item`);
 const moviesBoard = document.querySelector(`.films-list`);
 const moviesContainer = moviesBoard.querySelector(`.films-list__container`);
 const moviesLists = document.querySelectorAll(`.films-list__container`);
