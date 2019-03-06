@@ -1,6 +1,7 @@
 import {getRandomNumber, removeChildren} from './util.js';
 import makeFilter from './make-filter.js';
 import makeMovie from './make-movie.js';
+import getMovie from './get-movie.js';
 
 const FILTERS = [`All movies`, `Watchlist`, `History`, `Favorites`];
 
@@ -35,7 +36,7 @@ renderFilters();
 
 const renderMovies = (count, dist) => {
   for (let i = 0; i < count; i++) {
-    dist.insertAdjacentHTML(`beforeend`, makeMovie());
+    dist.insertAdjacentHTML(`beforeend`, makeMovie(getMovie()));
   }
 };
 
