@@ -24,8 +24,8 @@ const getRandomText = (string, separator, length) => {
 
 export default () => ({
   title: getRandomText(LOREM, ` `, 3),
-  rating: `10`,
-  year: `2019`,
+  rating: 10,
+  year: 2019,
   duration: `1h 30m`,
   genre: `Comedy`,
   poster: `images/posters/${POSTERS[[Math.floor(Math.random() * POSTERS.length)]]}.jpg`,
