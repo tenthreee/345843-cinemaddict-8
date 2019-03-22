@@ -1,7 +1,8 @@
-import {createElement} from './util.js';
+import Component from './component.js';
 
-export default class Movie {
+export default class Movie extends Component {
   constructor(data) {
+    super();
     this._title = data.title;
     this._rating = data.rating;
     this._duration = data.duration;
@@ -9,24 +10,13 @@ export default class Movie {
     this._poster = data.poster;
     this._description = data.description;
     this._comments = data.comments;
-
-    this._element = null;
-    this._state = {
-      // isInWatchlist: true,
-      // isWatched: false,
-      // isFavorite: false,
-    };
-
     this._onClick = null;
+
     this._onCommentsClick = this._onCommentsClick.bind(this);
   }
 
   _onCommentsClick() {
     return typeof this._onCLick === `function` && this._onCLick();
-  }
-
-  get element() {
-    return this._element;
   }
 
   set onCLick(fn) {
@@ -54,24 +44,13 @@ export default class Movie {
     </article>`.trim();
   }
 
-  bind() {
+  createListeners() {
     this._element.querySelector(`.film-card__comments`)
-        .addEventListener(`click`, this._onCommentsClick.bind);
+        .addEventListener(`click`, this._onCommentsClick);
   }
 
-  render() {
-    this._element = createElement(this.template);
-    this.bind();
-    return this._element;
-  }
-
-  unbind() {
+  removeListeners() {
     this._element.querySelector(`.film-card__comments`)
-        .removeEventListener(`click`, this._onCommentsClick.bind);
-  }
-
-  unrender() {
-    this.unbind();
-    this._element = null;
+        .removeEventListener(`click`, this._onCommentsClick);
   }
 }

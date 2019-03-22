@@ -1,7 +1,8 @@
-import {createElement} from './util.js';
+import Component from './component.js';
 
-export default class MoviePopup {
+export default class MoviePopup extends Component {
   constructor(data) {
+    super();
     this._title = data.title;
     this._rating = data.rating;
     this._duration = data.duration;
@@ -9,23 +10,13 @@ export default class MoviePopup {
     this._poster = data.poster;
     this._description = data.description;
     this._comments = data.comments;
-
-    this._element = null;
-    this._state = {
-      // isInWatchlist: true,
-      // isWatched: false,
-      // isFavorite: false,
-    };
+    this._onClose = null;
 
     this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
   }
 
   _onCloseButtonClick() {
     return typeof this._onClose === `function` && this._onClose();
-  }
-
-  get element() {
-    return this._element;
   }
 
   set onClose(fn) {
@@ -111,16 +102,18 @@ export default class MoviePopup {
           <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${this._comments}</span></h3>
 
           <ul class="film-details__comments-list">
+          ${(Array.from(this._comments).map((comment) => (`
             <li class="film-details__comment">
-              <span class="film-details__comment-emoji">😴</span>
+              <span class="film-details__comment-emoji">${comment.emoji}</span>
               <div>
-                <p class="film-details__comment-text">So long-long story, boring!</p>
+                <p class="film-details__comment-text">${comment.text}</p>
                 <p class="film-details__comment-info">
-                  <span class="film-details__comment-author">Tim Macoveev</span>
-                  <span class="film-details__comment-day">3 days ago</span>
+                  <span class="film-details__comment-author">${comment.author}</span>
+                  <span class="film-details__comment-day">${comment.day}</span>
                 </p>
               </div>
-            </li>
+            </li>`
+            .trim()))).join(``)}
           </ul>
 
           <div class="film-details__new-comment">
@@ -197,24 +190,13 @@ export default class MoviePopup {
     </section>`.trim();
   }
 
-  bind() {
+  createListeners() {
     this._element.querySelector(`.film-details__close-btn`)
         .addEventListener(`click`, this._onCloseButtonClick);
   }
 
-  render() {
-    this._element = createElement(this.template);
-    this.bind();
-    return this._element;
-  }
-
-  unbind() {
+  removeListeners() {
     this._element.querySelector(`.film-details__close-btn`)
         .removeEventListener(`click`, this._onCloseButtonClick);
-  }
-
-  unrender() {
-    this.unbind();
-    this._element = null;
   }
 }
