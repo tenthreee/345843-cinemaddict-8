@@ -16,6 +16,8 @@ export default class MoviePopup {
       // isWatched: false,
       // isFavorite: false,
     };
+
+    this._onCloseButtonClick = this._onCloseButtonClick.bind(this);
   }
 
   _onCloseButtonClick() {
@@ -197,7 +199,7 @@ export default class MoviePopup {
 
   bind() {
     this._element.querySelector(`.film-details__close-btn`)
-        .addEventListener(`click`, this._onCloseButtonClick.bind(this));
+        .addEventListener(`click`, this._onCloseButtonClick);
   }
 
   render() {
@@ -207,7 +209,8 @@ export default class MoviePopup {
   }
 
   unbind() {
-    //
+    this._element.querySelector(`.film-details__close-btn`)
+        .removeEventListener(`click`, this._onCloseButtonClick);
   }
 
   unrender() {

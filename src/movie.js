@@ -18,10 +18,10 @@ export default class Movie {
     };
 
     this._onClick = null;
+    this._onCommentsClick = this._onCommentsClick.bind(this);
   }
 
   _onCommentsClick() {
-    // debugger;
     return typeof this._onCLick === `function` && this._onCLick();
   }
 
@@ -56,7 +56,7 @@ export default class Movie {
 
   bind() {
     this._element.querySelector(`.film-card__comments`)
-        .addEventListener(`click`, this._onCommentsClick.bind(this));
+        .addEventListener(`click`, this._onCommentsClick.bind);
   }
 
   render() {
@@ -66,7 +66,8 @@ export default class Movie {
   }
 
   unbind() {
-    //
+    this._element.querySelector(`.film-card__comments`)
+        .removeEventListener(`click`, this._onCommentsClick.bind);
   }
 
   unrender() {
